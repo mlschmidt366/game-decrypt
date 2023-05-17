@@ -1,3 +1,7 @@
+<svelte:head>
+    <script src="https://cdn.jsdelivr.net/npm/party-js@latest/bundle/party.min.js" />
+</svelte:head>
+
 <script lang="ts">
     import { GameModel } from "$lib/gameModel";
     import { GameAI } from "$lib/gameAI";
@@ -26,6 +30,9 @@
             if (gameModel.IsTerminal()) {
                 clearInterval(timer);
                 showResults = true;
+                if (gameModel.Returns()[1] === 1) {
+                    party.confetti(document.body);
+                }
             }
         }, tickTime);
     }
@@ -39,7 +46,7 @@
 <Progressbar
     progress={state.scores[0] / gameModel.winScore}
     staged={state.turnTotal[0] / gameModel.winScore}
-    text={state.skipTurns[0] > 0 ? "Applying backup..." : "Decrypting..."}
+    text={state.skipTurns[0] > 0 ? "Restoring backup..." : "Decrypting..."}
 />
 <!--<p>Score: {state.scores[0]}, Turn Total: {state.turnTotal[0]}, Skip turns left: {state.skipTurns[0]}</p>-->
 <hr>
@@ -50,7 +57,7 @@
 <Progressbar
     progress={state.scores[1] / gameModel.winScore}
     staged={state.turnTotal[1] / gameModel.winScore}
-    text={state.skipTurns[1] > 0 ? "Applying backup..." : "Decrypting..."}
+    text={state.skipTurns[1] > 0 ? "Restoring backup..." : "Decrypting..."}
 />
 <!--<p>Score: {state.scores[1]}, Turn Total: {state.turnTotal[1]}, Skip turns left: {state.skipTurns[1]}</p>-->
 
