@@ -1,6 +1,10 @@
 <svelte:head>
-    <script src="https://cdn.jsdelivr.net/npm/party-js@latest/bundle/party.min.js" />
+    <script src="https://cdn.jsdelivr.net/npm/party-js@latest/bundle/party.min.js" ></script>
 </svelte:head>
+
+<script lang="ts" context="module">
+    declare var party: any; // imported from external source
+</script>
 
 <script lang="ts">
     import { GameModel } from "$lib/gameModel";
